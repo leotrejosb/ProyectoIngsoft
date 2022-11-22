@@ -23,7 +23,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.css",
+              "./node_modules/bootstrap-grid-only-css/dist/css/bootstrap-grid.min.css"
             ],
             "scripts": []
           },
@@ -90,12 +92,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.css",
+              "./node_modules/bootstrap-grid-only-css/dist/css/bootstrap-grid.min.css"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "dd77bc01-8e31-4409-8f36-bf927ab425bd"
   }
 }
