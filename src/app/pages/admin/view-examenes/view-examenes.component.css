@@ -1,4 +1,4 @@
 .example-header-image{
-    background-image: url("../../../../assets/test.png") ;
-    background-size: cover;
+  background-image: url('../../../../assets/test.png');
+  background-size: cover;
 }

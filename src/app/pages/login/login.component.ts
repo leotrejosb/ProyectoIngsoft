@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login.service';
-
+import { LoginService } from './../../services/login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +10,11 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginData ={
-    "username" : "",
-    "password" : ""
+  loginData = {
+    "username" : '',
+    "password" : '',
   }
+
   constructor(private snack:MatSnackBar,private loginService:LoginService,private router:Router) { }
 
   ngOnInit(): void {
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
           else if(this.loginService.getUserRole() == 'NORMAL'){
             //user dashboard
             //window.location.href = '/user-dashboard';
-            this.router.navigate(['user-dashboard']);
+            this.router.navigate(['user-dashboard/0']);
             this.loginService.loginStatusSubjec.next(true);
           }
           else{

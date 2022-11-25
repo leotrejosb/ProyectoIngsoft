@@ -1,10 +1,9 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { CategoriaService } from 'src/app/services/categoria.service';
-import { ExamenService } from 'src/app/services/examen.service';
-import Swal from 'sweetalert2';
+import { ExamenService } from './../../../services/examen.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import  Swal  from 'sweetalert2';
+import { CategoriaService } from './../../../services/categoria.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-add-examen',
@@ -13,7 +12,8 @@ import Swal from 'sweetalert2';
 })
 export class AddExamenComponent implements OnInit {
 
-  categorias :any=[];
+  categorias:any = [];
+
   examenData = {
     titulo:'',
     descripcion:'',
@@ -25,48 +25,53 @@ export class AddExamenComponent implements OnInit {
     }
   }
 
-  constructor(private categoriaService:CategoriaService, private snack:MatSnackBar,private examenService:ExamenService,private router:Router) { }
+  constructor(
+    private categoriaService:CategoriaService,
+    private snack:MatSnackBar,
+    private examenService:ExamenService,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.categoriaService.listarCategorias().subscribe(
-      (dato:any)=>{
+      (dato:any) => {
         this.categorias = dato;
-        console.log(this.categorias)
-      },(error) =>{
+        console.log(this.categorias);
+      },(error) => {
         console.log(error);
-        Swal.fire("Error","Error al cargar los datos","error")
+        Swal.fire('Error !!','Error al cargar los datos','error');
       }
-      )
+    )
   }
 
   guardarCuestionario(){
     console.log(this.examenData);
-    if(this.examenData.titulo.trim() == '' || this.examenData.titulo.trim() == null){
-      this.snack.open("El titulo es requerido","",{
-        duration : 3000,
-        verticalPosition : "top"
+    if(this.examenData.titulo.trim() == '' || this.examenData.titulo == null){
+      this.snack.open('El título es requerido','',{
+        duration:3000
       });
-      return;
+      return ;
     }
+
     this.examenService.agregarExamen(this.examenData).subscribe(
-      (data:any) =>{
+      (data) => {
         console.log(data);
-        Swal.fire("Examen guardado","El examen ha sido guardado con exito","success");
-        this.router.navigate(['/admin/examenes/'])
+        Swal.fire('Examen guardado','El examen ha sido guardado con éxito','success');
         this.examenData = {
-          titulo:'',
-          descripcion:'',
-          puntosMaximos:'',
-          numeroDePreguntas:'',
+          titulo : '',
+          descripcion : '',
+          puntosMaximos : '',
+          numeroDePreguntas : '',
           activo:true,
           categoria:{
             categoriaId:''
           }
         }
-      },(error) =>{
-        console.log(error);
-        Swal.fire("Error","Error al guardar el examen","error");
+        this.router.navigate(['/admin/examenes']);
+      },
+      (error) => {
+        Swal.fire('Error','Error al guardar el examen','error');
       }
     )
   }
+
 }

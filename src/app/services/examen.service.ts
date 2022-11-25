@@ -7,10 +7,9 @@ import baserUrl from './helper';
 })
 export class ExamenService {
 
-  constructor(private http:HttpClient) { 
-  }
+  constructor(private http:HttpClient) { }
 
-  public listarCuestionario(){
+  public listarCuestionarios(){
     return this.http.get(`${baserUrl}/examen/`);
   }
 
