@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     "username" : "",
     "password" : ""
   }
-  constructor(private snack:MatSnackBar, private loginService:LoginService, private router: Router) { }
+  constructor(private snack:MatSnackBar,private loginService:LoginService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -23,16 +23,14 @@ export class LoginComponent implements OnInit {
   formSubmit(){
     if(this.loginData.username.trim() == '' || this.loginData.username.trim() == null){
       this.snack.open('El nombre de usuario es requerido !!','Aceptar',{
-        duration:3000,
-        verticalPosition:'top'
+        duration:3000
       })
       return;
     }
 
     if(this.loginData.password.trim() == '' || this.loginData.password.trim() == null){
       this.snack.open('La contraseña es requerida !!','Aceptar',{
-        duration:3000,
-        verticalPosition:'top'
+        duration:3000
       })
       return;
     }
@@ -45,14 +43,14 @@ export class LoginComponent implements OnInit {
           this.loginService.setUser(user);
           console.log(user);
 
-          if(this.loginService.getUserRole()=='ADMIN'){
+          if(this.loginService.getUserRole() == 'ADMIN'){
             //dashboard admin
             //window.location.href = '/admin';
-            this.router.navigate(['admin']);  
+            this.router.navigate(['admin']);
             this.loginService.loginStatusSubjec.next(true);
-
           }
-          else if (this.loginService.getUserRole() == 'NORMAL'){
+          else if(this.loginService.getUserRole() == 'NORMAL'){
+            //user dashboard
             //window.location.href = '/user-dashboard';
             this.router.navigate(['user-dashboard']);
             this.loginService.loginStatusSubjec.next(true);
@@ -61,11 +59,10 @@ export class LoginComponent implements OnInit {
             this.loginService.logout();
           }
         })
-      },(error) =>{
+      },(error) => {
         console.log(error);
-        this.snack.open("Datos inválidos !!, Vuelva a intentar","Aceptar",{
-          duration :3000,
-          verticalPosition : 'top'
+        this.snack.open('Detalles inválidos , vuelva a intentar !!','Aceptar',{
+          duration:3000
         })
       }
     )
