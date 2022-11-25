@@ -1,20 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import baserUrl from './helper';
 import { Subject } from 'rxjs';
-
+import baserUrl from './helper';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http:HttpClient) { 
-  }
+  public loginStatusSubjec = new Subject<boolean>();
 
-  public loginStatusSubjec= new Subject<boolean>();
+  constructor(private http:HttpClient) { }
 
-  //Generamos el token
+  //generamos el token
   public generateToken(loginData:any){
     return this.http.post(`${baserUrl}/generate-token`,loginData);
   }
