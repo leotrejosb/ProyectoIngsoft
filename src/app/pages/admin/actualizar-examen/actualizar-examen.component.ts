@@ -1,8 +1,8 @@
+import  Swal  from 'sweetalert2';
+import { CategoriaService } from './../../../services/categoria.service';
+import { ExamenService } from './../../../services/examen.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
-import { CategoriaService } from 'src/app/services/categoria.service';
-import { ExamenService } from 'src/app/services/examen.service';
-import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-actualizar-examen',
@@ -11,7 +11,11 @@ import Swal from 'sweetalert2';
 })
 export class ActualizarExamenComponent implements OnInit {
 
-  constructor(private route:ActivatedRoute,private examenService:ExamenService,private categoriaService:CategoriaService,private router:Router) { }
+  constructor(
+    private route:ActivatedRoute,
+    private examenService:ExamenService,
+    private categoriaService:CategoriaService,
+    private router:Router) { }
 
   examenId = 0;
   examen:any;
@@ -20,20 +24,21 @@ export class ActualizarExamenComponent implements OnInit {
   ngOnInit(): void {
     this.examenId = this.route.snapshot.params['examenId'];
     this.examenService.obtenerExamen(this.examenId).subscribe(
-      (data) =>{
+      (data) => {
         this.examen = data;
         console.log(this.examen);
-      },(error)=>{
+      },
+      (error) => {
         console.log(error);
-
       }
     )
 
     this.categoriaService.listarCategorias().subscribe(
-      (data:any)=>{
+      (data:any) => {
         this.categorias = data;
-      },(error) =>{
-        alert("Error al cargar las categorias")
+      },
+      (error) => {
+        alert('Error al cargar las categorías');
       }
     )
   }

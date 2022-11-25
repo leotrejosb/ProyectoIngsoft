@@ -8,11 +8,12 @@ import baserUrl from './helper';
 export class CategoriaService {
 
   constructor(private http:HttpClient) { }
+
   public listarCategorias(){
-    return this.http.get(`${baserUrl}/categoria/`)
+    return this.http.get(`${baserUrl}/categoria/`);
   }
 
   public agregarCategoria(categoria:any){
-    return this.http.post(`${baserUrl}/categoria/`,categoria)
+    return this.http.post(`${baserUrl}/categoria/`,categoria);
   }
 }
